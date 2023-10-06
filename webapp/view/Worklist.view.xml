@@ -1,0 +1,260 @@
+<mvc:View controllerName="com.pro.phase2.ZPRO_PROTIF2.controller.Worklist" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:core="sap.ui.core"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:sfb="sap.ui.comp.smartfilterbar">
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
+		<semantic:titleHeading>
+			<Title text="{i18n>worklistTitle}" level="H2"/>
+		</semantic:titleHeading>
+		<semantic:headerContent>
+			<GenericTile class="sapUiLargeMarginBegin sapUiLargeMarginBottom tileLayout" header="{i18n>Ordersonhold}" press="onPress1">
+				<TileContent >
+					<NumericContent value="{KPI>/ordersonhold}" withMargin="false"/>
+				</TileContent>
+			</GenericTile>
+			<GenericTile class="sapUiLargeMarginBegin sapUiLargeMarginBottom" header="{i18n>pre}" press="onPress2">
+				<TileContent >
+					<NumericContent value="{KPI>/previouslyreleasedorders}" withMargin="false"/>
+				</TileContent>
+			</GenericTile>
+			<HBox>
+				<GenericTile class="sapUiLargeMarginBegin sapUiLargeMarginBottom" header="{i18n>over}" press="onPress3">
+					<TileContent >
+						<NumericContent value="{KPI>/overduepaymentterms}" withMargin="false"/>
+					</TileContent>
+				</GenericTile>
+				<GenericTile class="sapUiLargeMarginBegin sapUiLargeMarginBottom" header="{i18n>exc}" press="onPress4">
+					<TileContent >
+						<NumericContent value="{KPI>/exceddedcreditlimit}" withMargin="false"/>
+					</TileContent>
+				</GenericTile>
+				<GenericTile class="sapUiLargeMarginBegin sapUiLargeMarginBottom" header="{i18n>zero}" press="onPress5">
+					<TileContent>
+						<NumericContent value="{KPI>/zerovalue}" withMargin="false"/>
+					</TileContent>
+				</GenericTile>
+				<GenericTile class="sapUiLargeMarginBegin sapUiLargeMarginBottom" header="{i18n>validtoexpired}" press="onPress6">
+					<TileContent>
+						<NumericContent value="{KPI>/vaildtoexpired}" withMargin="false"/>
+					</TileContent>
+				</GenericTile>
+				<GenericTile class="sapUiLargeMarginBegin sapUiLargeMarginBottom" header="{i18n>ad}" press="onPress7">
+					<TileContent>
+						<NumericContent value="{KPI>/advancepaymentterms}" withMargin="false"/>
+					</TileContent>
+				</GenericTile>
+			</HBox>
+			<sfb:SmartFilterBar id="smartFilterBar" entitySet="ZC_ProtifCreditView" search="onSearch1"
+				class="sapUiLargeMarginBegin sapUiLargeMarginBottom" persistencyKey="UniqueAndStablePersistencyKey"
+				beforeVariantFetch="onBeforeVariantFetch" afterVariantLoad="onAfterVariantLoad">
+				<sfb:controlConfiguration>
+					<sfb:ControlConfiguration id="zcu" key="CollectUser" label="{i18n>cs}" index="1" groupId="_BASIC"/>
+				</sfb:controlConfiguration>
+				<sfb:controlConfiguration>
+					<sfb:ControlConfiguration id="zso" key="SoldToParty" label="{i18n>SoldToParty}" index="2" groupId="_BASIC"/>
+				</sfb:controlConfiguration>
+				<sfb:controlConfiguration >
+					<sfb:ControlConfiguration id="zsoc" key="Country" label="{i18n>SoldToPartyCountry}" index="3" groupId="_BASIC"/>
+				</sfb:controlConfiguration>
+				<sfb:controlConfiguration >
+					<sfb:ControlConfiguration id="zco" key="CompanyCode" label="{i18n>CompanyCode}" index="4" groupId="_BASIC"/>
+				</sfb:controlConfiguration>
+				<sfb:controlConfiguration >
+					<sfb:ControlConfiguration id="zpt" key="PaymentTerm" label="{i18n>pt}" index="5" groupId="_BASIC"/>
+				</sfb:controlConfiguration>
+				<sfb:controlConfiguration >
+					<sfb:ControlConfiguration id="zcr" key="CreditCheckRule" label="{i18n>ccr}" index="6" groupId="_BASIC"/>
+				</sfb:controlConfiguration>
+				<sfb:controlConfiguration >
+					<sfb:ControlConfiguration id="zcsr" key="UserId" label="{i18n>csr}" index="7" groupId="_BASIC"/>
+				</sfb:controlConfiguration>
+				<sfb:controlConfiguration >
+					<sfb:ControlConfiguration id="zsale" key="SalesOrderNumber" label="{i18n>sales}" index="8" groupId="_BASIC"/>
+				</sfb:controlConfiguration>
+				<sfb:controlConfiguration >
+					<sfb:ControlConfiguration id="zot" key="OrderType" label="{i18n>ot}" index="9" groupId="_BASIC"/>
+				</sfb:controlConfiguration>
+				<sfb:controlConfiguration>
+					<sfb:ControlConfiguration id="zpd" key="PlannedDispatchDate" label="{i18n>pdd}" index="10" groupId="_BASIC" controlType="date"></sfb:ControlConfiguration>
+				</sfb:controlConfiguration>
+				<sfb:controlConfiguration>
+					<sfb:ControlConfiguration id="zio" key="InternationalOrder" label="{i18n>io}" index="11" groupId="_BASIC">
+						<sfb:customControl>
+							<MultiComboBox id="intenrationalorder">
+								<items>
+									<core:Item key="Y" text="Yes"/>
+									<core:Item key="N" text="No"/>
+								</items>
+							</MultiComboBox>
+						</sfb:customControl>
+					</sfb:ControlConfiguration>
+				</sfb:controlConfiguration>
+				<sfb:controlConfiguration>
+					<sfb:ControlConfiguration id="raagstatus" key="RagStatus" label="{i18n>rs}" index="12" groupId="_BASIC" filterType="single">
+						<sfb:customControl>
+							<MultiComboBox id="RAGSTATUS">
+								<items>
+									<core:Item key="R" text="Red"/>
+									<core:Item key="G" text="Green"/>
+									<core:Item key="A" text="Amber"/>
+								</items>
+							</MultiComboBox>
+						</sfb:customControl>
+					</sfb:ControlConfiguration>
+				</sfb:controlConfiguration>
+			</sfb:SmartFilterBar>
+		</semantic:headerContent>
+		<semantic:content>
+			<smartTable:SmartTable id="smrtTblSpecificBadDebt1" entitySet="ZC_ProtifCreditView" useExportToExcel="true" useVariantManagement="true"
+				smartFilterId="smartFilterBar" useTablePersonalisation="true" showRowCount="true" persistencyKey="badDebtFilterPersKey1"
+				class="sapUiLargeMarginBegin sapUiLargeMarginBottom" tableType="ResponsiveTable" beforeRebindTable="onDataGet" demandPopin="true"
+				requestAtLeastFields="RagStatus,SoldToPartyName,TotalValue,CreationDate,CreatedBy,InternationalOrder,RiskCategory,CreditCheckRule,RequestedDeliveryDate,PlannedDeliveryDate,PaymentTermText,ShippingType,CarrierName,CreditStatus,DeliveryBlockReason,CompanyCodeText,ShiptoParty,Address,Street,CityName,Region,CreditText,DeliveryBlockReasonText,RelaseDateOverdue,Payer,PayerName,PayerCountry,Department,UserId,StaticCreditLimitCheck,MaximumDocumentValue,DynLimit,MaxDunn,EldoItem,PayMbeh,Otherchks,OpenItem,OverDueInvoices,OverdueInvoiceAmount,OpenInvoices,OpenInvoiceAmount,LineItem"
+				initiallyVisibleFields="SalesOrderNumber,SoldToParty,Country,CompanyCode,PaymentTermText,Currency,OrderValue,CreditLimit,CreditLimitUtilized,PastDue,PastDueValue,InternationalOrderCountry,LatestReleaseDate,PlannedDispatchDate">
+				<smartTable:customToolbar>
+					<Toolbar design="Transparent" id="overflowtoolbarBtn">
+						<ToolbarSpacer id="toolbarspacerBtn"/>
+						<Button id="Detail" icon="sap-icon://detail-view" press="onPress"></Button>
+						<Button id="release" text="{i18n>Release}" press="onRelease" enabled="true"></Button>
+					</Toolbar>
+				</smartTable:customToolbar>
+				<Table id="treeTable1" growing="true" mode="MultiSelect" selectionChange="onTableRowSelect" sticky="HeaderToolbar,ColumnHeaders">
+					<columns>
+						<Column id="oSales">
+							<customData>
+								<core:CustomData id="idoSales" key="p13nData"
+									value='\{"columnKey": "SalesOrderNumber", "autoColumnWidth": \{ "visibleProperty": "SalesOrderNumber" }, "columnIndex": 0, "leadingProperty": "SalesOrderNumber", "sortProperty": "SalesOrderNumber", "additionalProperty": "SalesOrderNumber", "description": "SalesOrderNumber", "SalesOrderNumber": "descriptionOnly", "width": "360px"}'/>
+							</customData>
+							<Text id="_IDEGen_textVB" width="10rem" text="{i18n>SalesOrder}"/>
+						</Column>
+						<Column id="oSoldto">
+							<customData>
+								<core:CustomData id="idoSoldto" key="p13nData"
+									value='\{"columnKey": "SoldToParty", "autoColumnWidth": \{ "visibleProperty": "SoldToParty" }, "columnIndex": 1, "leadingProperty": "SoldToParty", "sortProperty": "SoldToParty", "additionalProperty": "SoldToParty", "description": "SoldToParty", "SoldToParty": "descriptionOnly", "width": "360px"}'/>
+							</customData>
+							<Text id="_IDEGen_textVB1" width="8rem" text="{i18n>SoldToPartyID}"/>
+						</Column>
+						<Column id="oSodltocountry">
+							<customData>
+								<core:CustomData id="idoSoldtocountry" key="p13nData"
+									value='\{"columnKey": "Country", "autoColumnWidth": \{ "visibleProperty": "Country" }, "columnIndex": 2, "leadingProperty": "Country", "sortProperty": "Country", "additionalProperty": "Country", "description": "Country", "Country": "descriptionOnly", "width": "360px"}'/>
+							</customData>
+							<Text id="_IDEGen_textVB2" width="8rem" text="{i18n>Country}"/>
+						</Column>
+						<Column id="oCompany">
+							<customData>
+								<core:CustomData id="idcom" key="p13nData"
+									value='\{"columnKey": "CompanyCode", "autoColumnWidth": \{ "visibleProperty": "CompanyCode" }, "columnIndex": 3, "leadingProperty": "CompanyCode", "sortProperty": "CompanyCode", "additionalProperty": "CompanyCode", "description": "CompanyCode", "CompanyCode": "descriptionOnly", "width": "360px"}'/>
+							</customData>
+							<Text id="_IDEGen_textVB3" width="8rem" text="{i18n>CompanyCode}"/>
+						</Column>
+						<Column id="oPat">
+							<customData>
+								<core:CustomData id="idPay" key="p13nData"
+									value='\{"columnKey": "PaymentTermText", "autoColumnWidth": \{ "visibleProperty": "PaymentTermText" }, "columnIndex": 4, "leadingProperty": "PaymentTermText", "sortProperty": "PaymentTermText", "additionalProperty": "PaymentTermText", "description": "PaymentTermText", "PaymentTermText": "descriptionOnly", "width": "360px"}'/>
+							</customData>
+							<Text id="_IDEGen_textVB32" width="8rem" text="{i18n>pt}"/>
+						</Column>
+						<Column id="oCurr">
+							<customData>
+								<core:CustomData id="idcurr" key="p13nData"
+									value='\{"columnKey": "Currency", "autoColumnWidth": \{ "visibleProperty": "Currency" }, "columnIndex": 5, "leadingProperty": "Currency", "sortProperty": "Currency", "additionalProperty": "Currency", "description": "Currency", "Currency": "descriptionOnly", "width": "360px"}'/>
+							</customData>
+							<Text id="_IDEGen_textVB4" width="8rem" text="{i18n>Currency}"/>
+						</Column>
+						<Column id="oord">
+							<customData>
+								<core:CustomData id="idor" key="p13nData"
+									value='\{"columnKey": "OrderValue", "autoColumnWidth": \{ "visibleProperty": "OrderValue" }, "columnIndex": 6, "leadingProperty": "OrderValue", "sortProperty": "OrderValue", "additionalProperty": "OrderValue", "description": "OrderValue", "OrderValue": "descriptionOnly", "width": "360px"}'/>
+							</customData>
+							<Text id="_IDEGen_textVB5" width="8rem" text="{i18n>ordervalue}"/>
+						</Column>
+						<Column id="ooclu">
+							<customData>
+								<core:CustomData id="idclu" key="p13nData"
+									value='\{"columnKey": "CreditLimitUtilized", "autoColumnWidth": \{ "visibleProperty": "CreditLimitUtilized" }, "columnIndex": 8, "leadingProperty": "CreditLimitUtilized", "sortProperty": "CreditLimitUtilized", "additionalProperty": "CreditLimitUtilized", "description": "CreditLimitUtilized", "CreditLimitUtilized": "descriptionOnly", "width": "360px"}'/>
+							</customData>
+							<Text id="_IDEGen_textVB6" width="8rem" text="{i18n>CreditLimitUtilized}"/>
+						</Column>
+						<Column id="oopd">
+							<customData>
+								<core:CustomData id="idpd" key="p13nData"
+									value='\{"columnKey": "PastDue", "autoColumnWidth": \{ "visibleProperty": "PastDue" }, "columnIndex": 9, "leadingProperty": "PastDue", "sortProperty": "PastDue", "additionalProperty": "PastDue", "description": "PastDue", "PastDue": "descriptionOnly", "width": "360px"}'/>
+							</customData>
+							<Text id="_IDEGen_textVB7" width="8rem" text="{i18n>PastDue}"/>
+						</Column>
+						<Column id="oopdv">
+							<customData>
+								<core:CustomData id="idpdv" key="p13nData"
+									value='\{"columnKey": "PastDueValue", "autoColumnWidth": \{ "visibleProperty": "PastDueValue" }, "columnIndex": 10, "leadingProperty": "PastDueValue", "sortProperty": "PastDueValue", "additionalProperty": "PastDueValue", "description": "PastDueValue", "PastDueValue": "descriptionOnly", "width": "360px"}'/>
+							</customData>
+							<Text id="_IDEGen_textVB8" width="8rem" text="{i18n>PastDueValue}"/>
+						</Column>
+						<Column id="opr">
+							<customData>
+								<core:CustomData id="idpr" key="p13nData"
+									value='\{"columnKey": "InternationalOrderCountry", "autoColumnWidth": \{ "visibleProperty": "InternationalOrderCountry" }, "columnIndex": 11, "leadingProperty": "InternationalOrderCountry", "sortProperty": "InternationalOrderCountry", "additionalProperty": "InternationalOrderCountry", "description": "InternationalOrderCountry", "InternationalOrderCountry": "descriptionOnly", "width": "360px"}'/>
+							</customData>
+							<Text id="_IDEGen_textVB9" width="8rem" text="{i18n>InternationalOrder}"/>
+						</Column>
+						<Column id="oio">
+							<customData>
+								<core:CustomData id="io" key="p13nData"
+									value='\{"columnKey": "LatestReleaseDate", "autoColumnWidth": \{ "visibleProperty": "LatestReleaseDate" }, "columnIndex": 12, "leadingProperty": "LatestReleaseDate", "sortProperty": "LatestReleaseDate", "additionalProperty": "LatestReleaseDate", "description": "LatestReleaseDate", "LatestReleaseDate": "descriptionOnly", "width": "360px"}'/>
+							</customData>
+							<Text id="_IDEGen_textVB11" width="8rem" text="{i18n>LatestReleaseDate}"/>
+						</Column>
+						<Column id="opd">
+							<customData>
+								<core:CustomData id="ipd" key="p13nData"
+									value='\{"columnKey": "PlannedDispatchDate", "autoColumnWidth": \{ "visibleProperty": "PlannedDispatchDate" }, "columnIndex": 13, "leadingProperty": "PlannedDispatchDate", "sortProperty": "PlannedDispatchDate", "additionalProperty": "PlannedDispatchDate", "description": "PlannedDispatchDate", "PlannedDispatchDate": "descriptionOnly", "width": "360px"}'/>
+							</customData>
+							<Text id="_IDEGen_textVB12" width="8rem" text="{i18n>PlannceDispatchDate}"/>
+						</Column>
+						<Column id="ocbr" minScreenWidth="Tablet" demandPopin="true">
+							<customData>
+								<core:CustomData id="icbr" key="p13nData" demandPopin="true"
+									value='\{"columnKey": "Otherchks", "autoColumnWidth": \{ "visibleProperty": "Otherchks" }, "columnIndex": 14, "leadingProperty": "Otherchks", "sortProperty": "Otherchks", "additionalProperty": "Otherchks", "description": "Otherchks", "Otherchks": "descriptionOnly", "width": "360px"}'/>
+							</customData>
+							<Text id="_IDEGen_textVB13" width="8rem" text="{i18n>cbr}"/>
+						</Column>
+						<Column id="buttonID" hAlign="Center">
+							<customData>
+								<core:CustomData id="Count" key="p13nData"
+									value='\{"columnKey": "NotificationAction", "autoColumnWidth": \{ "visibleProperty": "NotificationAction" }, "columnIndex": 15, "leadingProperty": "NotificationAction", "sortProperty": "NotificationAction", "additionalProperty": "NotificationAction", "description": "NotificationAction", "displayBehaviour": "descriptionOnly", "width": "360px"}'/>
+							</customData>
+							<Button icon="sap-icon://bell" type="Transparent" id="rr"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem id="Approveclaim" visible="{parts:[{path:'RagStatus'}],formatter:'.formatter.setShowRecord'}"
+							highlight="{parts:[{path:'RagStatus'}],formatter:'.formatter.setRowColor'}">
+							<cells>
+								<Link text="{SalesOrderNumber}" press="handleOperationLinkPress"></Link>
+								<Text text=" {SoldToPartyName} {SoldToParty}"></Text>
+								<Text text="{Country}"></Text>
+								<Text text="{CompanyCode}"></Text>
+								<Text text="{PaymentTermText}"></Text>
+								<Text text="{Currency}"></Text>
+								<Text text="{OrderValue}"></Text>
+								<Text text="{CreditLimitUtilized}"></Text>
+								<Text text="{PastDue}"></Text>
+								<Text text="{PastDueValue}"></Text>
+								<Text text="{InternationalOrderCountry}"></Text>
+								<ObjectStatus text="{parts:[{path:'LatestReleaseDate'}],formatter:'.formatter.setDate'}"
+									state="{parts:[{path:'LatestReleaseDate'}],formatter:'.formatter.setDateColor'}"></ObjectStatus>
+								<ObjectStatus text="{parts:[{path:'PlannedDispatchDate'}],formatter:'.formatter.setDate'}"
+									state="{parts:[{path:'PlannedDispatchDate'}],formatter:'.formatter.setDateColor'}"></ObjectStatus>
+								<Text
+									text="{parts:[{path:'StaticCreditLimitCheck'},{path:'MaximumDocumentValue'},{path:'DynLimit'},{path:'MaxDunn'},{path:'EldoItem'},{path:'PayMbeh'},{path:'Otherchks'},{path:'OpenItem'}],formatter:'.formatter.setCredit'}"></Text>
+								<CheckBox id="oCheck" select="onSelected" selected="{parts:[{path:'NotificationAction'}],formatter:'.formatter.setNotif'}" hAlign="End"></CheckBox>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</smartTable:SmartTable>
+		</semantic:content>
+		<semantic:titleCustomTextActions>
+			<Button icon="sap-icon://refresh" press="onRefresh1"/>
+		</semantic:titleCustomTextActions>
+	</semantic:SemanticPage>
+</mvc:View>

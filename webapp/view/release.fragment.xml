@@ -1,0 +1,40 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<!-- Add Dialog -->
+	<Dialog id="oCreateAdd" showHeader="true" title="{i18n>relordche}" contentHeight="50%" contentWidth="50%">
+		<Table items="{ZRELEASE>/}" growing="true" mode="MultiSelect" id="oTableRel">
+			<columns>
+			
+				<Column>
+					<Text text="{i18n>SalesOrder}"></Text>
+				</Column>
+				<Column>
+					<Text text="{i18n>CompanyName}"></Text>
+				</Column>
+				<Column>
+					<Text text="{i18n>SoldToPartyCountry}"></Text>
+				</Column>
+				<Column>
+					<Text text="{i18n>ReleaseStatus}"></Text>
+				</Column>
+				<Column>
+					<Text text="Type" visible="false"></Text>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem >
+					
+					<Text text="{ZRELEASE>SalesOrderNumber}" ></Text>
+					<Text text="{ZRELEASE>CompanyCodeText}"></Text>
+					<Text text="{ZRELEASE>Country}"></Text>
+					<ObjectStatus text="{ZRELEASE>RELEASESTATUS}" icon="{parts:[{path:'ZRELEASE>TYPE'}],formatter:'.formatter.setStatus'}"
+						state="{parts:[{path:'ZRELEASE>TYPE'}],formatter:'.formatter.setStatusMessage'}"/>
+					<Text text="{ZRELEASE>TYPE}" visible="false"></Text>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<buttons>
+			<Button text="Release" press="onSave"></Button>
+			<Button text="Cancel" press="onCancel"></Button>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

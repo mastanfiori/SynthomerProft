@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<!-- Add Dialog -->
+	<Dialog id="oTextShow" showHeader="true" title="Item text details" contentHeight="50%" contentWidth="50%">
+		<f:SimpleForm id="SimpleFormDisplayColumn_threeGroups123" editable="false">
+			<Label text="Document Number"></Label>
+			<Text text="{ZDETAIL>/DocumentNumber}"></Text>
+			<Label text="Item Text"></Label>
+			<TextArea text="{ZDETAIL>/ItemText}" editable="false"></TextArea>
+		</f:SimpleForm>
+		<buttons>
+			<Button text="Close" press="onCancel"></Button>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

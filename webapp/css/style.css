@@ -1,0 +1,36 @@
+
+
+.sapFDynamicPageHeader.sapFDynamicPageHeaderWithContent {
+    background-color: white;
+    padding: 1rem 3rem;
+    box-shadow: 0 0.125rem 0 0 #eff4f9, inset 0 -0.125rem 0 0 #d1e0ee;
+}
+
+
+
+.sapFDynamicPageTitle {
+    z-index: 3;
+    position: relative;
+    min-height: 3rem;
+    padding: 0.5rem 2rem 0.5rem 3rem;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    box-sizing: border-box;
+    background: white;
+}
+
+
+.sapMLnk1 {
+    color: #0070b1;
+    text-decoration: none;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: normal;
+    font-family: "72",Arial,Helvetica,sans-serif;
+    font-size: 1.2rem;
+    cursor: pointer;
+}

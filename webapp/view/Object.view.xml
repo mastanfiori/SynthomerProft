@@ -1,0 +1,300 @@
+<mvc:View controllerName="com.pro.phase2.ZPRO_PROTIF2.controller.Object" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:layout="sap.ui.layout" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:core="sap.ui.core"
+	xmlns:smartTable="sap.ui.comp.smarttable" xmlns:sfb="sap.ui.comp.smartfilterbar">
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
+		<semantic:titleHeading>
+			<f:SimpleForm id="SimpleFormDisplayColumn_threeGroups" layout="ResponsiveGridLayout" editable="false">
+				<HBox>
+					<Link text="{i18n>SalesOrder1} {ZDETAIL>/SalesOrderNumber}" class="sapMLnkcust sapUiResponsiveMargin sapMLnk1" press="handleOperationLinkPress"/>
+					<ObjectStatus title="Credit Status" state="{parts:[{path:'ZDETAIL>/CreditText'}],formatter:'.formatter.setCreditColor1'}"
+						text="{ZDETAIL>/CreditText}" class="sapUiResponsiveMargin"/>
+					<ObjectStatus title="Reason" text="{ZDETAIL>/DeliveryBlockReasonText}"
+						state="{parts:[{path:'ZDETAIL>/DeliveryBlockReasonText'}],formatter:'.formatter.setCreditColor'}" class="sapUiResponsiveMargin"/>
+				
+				</HBox>
+			</f:SimpleForm>
+		</semantic:titleHeading>
+		<semantic:headerContent>
+			<f:SimpleForm id="SimpleFormDisplayColumn_threeGroups236" editable="false" labelSpanXL="5" labelSpanL="5" labelSpanM="6" labelSpanS="6"
+				columnsM="2" columnsL="4" columnsXL="4" emptySpanXL="0" emptySpanL="0" layout="ResponsiveGridLayout">
+				<f:content>
+					<core:Title text="{i18n>Orderdetails}"/>
+					<Label text="{i18n>SoldToParty}" textAlign="Begin"/>
+					<Text id="nameText" text="{ZDETAIL>/SoldToPartyName} {i18n>comma} {ZDETAIL>/SoldToParty} {i18n>comma} {ZDETAIL>/Country}"/>
+					<Label text="{i18n>TotalValue}"/>
+					<Text text="{ZDETAIL>/TotalValue} {ZDETAIL>/Currency}"/>
+					<Label text="{i18n>OrderCreated}"/>
+					<ObjectStatus text="{parts:[{path:'ZDETAIL>/CreationDate'}],formatter:'.formatter.setDate'}"
+						state="{parts:[{path:'ZDETAIL>/CreationDate'}],formatter:'.formatter.setDateColor'}"></ObjectStatus>
+					<Label text="{i18n>OrderCreatedBy}"/>
+					<Text id="countryText" text="{ZDETAIL>/CreatedBy}"/>
+					<Label text="{i18n>InternationalOrder}"/>
+					<Text text="{parts:[{path:'ZDETAIL>/InternationalOrder'}],formatter:'.formatter.setInternational'}"/>
+					<core:Title text="{i18n>CreditInformation}"/>
+					<Label text="{i18n>Payer}"/>
+					<Text text="{ZDETAIL>/PayerName} {i18n>comma} {ZDETAIL>/Payer} {i18n>comma} {ZDETAIL>/PayerCountry}"/>
+					<Label text="{i18n>PaymentTerms}"/>
+					<Text text="{ZDETAIL>/PaymentTermText}"/>
+					<Label text="{i18n>Risk category}"/>
+					<Text text="{ZDETAIL>/RiskCategory}"/>
+					<Label text="{i18n>CreditCheckrule}"/>
+					<Text text="{ZDETAIL>/CreditCheckRule}"/>
+					<Label text="{i18n>Creditlimit}"/>
+					<Text text="{ZDETAIL>/CreditLimit} {ZDETAIL>/Currency}"/>
+					<Label text="{i18n>CreditlimitUsed}"/>
+					<Text text="{ZDETAIL>/CreditLimitUtilized} {ZDETAIL>/Currency}"/>
+					<core:Title text="{i18n>Dates}"/>
+					<Label text="{i18n>RequestedDeliverydate}"/>
+					<ObjectStatus text="{parts:[{path:'ZDETAIL>/RequestedDeliveryDate'}],formatter:'.formatter.setDate'}"
+						state="{parts:[{path:'ZDETAIL>/RequestedDeliveryDate'}],formatter:'.formatter.setDateColor'}"></ObjectStatus>
+					<Label text="{i18n>pdeld}"/>
+					<ObjectStatus text="{parts:[{path:'ZDETAIL>/PlannedDeliveryDate'}],formatter:'.formatter.setDate'}"
+						state="{parts:[{path:'ZDETAIL>/PlannedDeliveryDate'}],formatter:'.formatter.setDateColor'}"></ObjectStatus>
+					<Label text="{i18n>pdd}"/>
+					<ObjectStatus text="{parts:[{path:'ZDETAIL>/PlannedDispatchDate'}],formatter:'.formatter.setDate'}"
+						state="{parts:[{path:'ZDETAIL>/PlannedDispatchDate'}],formatter:'.formatter.setDateColor'}"></ObjectStatus>
+					<Label text="{i18n>Latestreleasedate}"/>
+					<ObjectStatus text="{parts:[{path:'ZDETAIL>/LatestReleaseDate'}],formatter:'.formatter.setDate'}"
+						state="{parts:[{path:'ZDETAIL>/LatestReleaseDate'}],formatter:'.formatter.setDateColor'}"></ObjectStatus>
+					<Text text=" {RelaseDateOverdue}"></Text>
+					<core:Title text="{i18n>Deliverydetails}"/>
+					<Label text="Shipping type"/>
+					<Text text="{ZDETAIL>/ShippingType}"/>
+					<Label text="{i18n>Carriername}"/>
+					<Text text="{ZDETAIL>/CarrierName}"/>
+					<Label text="{i18n>Shipto}"/>
+					<Text text="{ZDETAIL>/Address} {i18n>comma} {ZDETAIL>/Street} {i18n>comma} {ZDETAIL>/CityName} {i18n>comma} {ZDETAIL>/Region}"/>
+					<Label text="{i18n>CountryCode}"/>
+					<Text text="{ZDETAIL>/Country}"/>
+				</f:content>
+			</f:SimpleForm>
+		</semantic:headerContent>
+		<semantic:content>
+			<IconTabBar id="idIconTabBarNoIcons" expanded="{device>/isNoPhone}">
+				<items>
+					<IconTabFilter text="{i18n>Overduecustomerlineitems}" key="overdue">
+						<f:SimpleForm id="SimpleFormDisplay480_12120" editable="false" layout="ResponsiveGridLayout" title="Overdue customer line items"
+							labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0"
+							emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1" singleContainerFullSize="false">
+							<f:content>
+								<core:Title text=""/>
+								<Label text="{i18n>Overdueinvoices}"/>
+								<Text text="{ZDETAIL>/OverDueInvoices}"/>
+								<Label text="{i18n>Overdueinvoicesamount}"/>
+								<Text text="{ZDETAIL>/OverdueInvoiceAmount} {ZDETAIL>/Currency}"/>
+								<core:Title text=""/>
+								<Label text="{i18n>Openinvoices}"/>
+								<Text text="{ZDETAIL>/OpenInvoices}"/>
+								<Label text="{i18n>Openinvoicesamount}"/>
+								<Text text="{ZDETAIL>/OpenInvoiceAmount} {ZDETAIL>/Currency}"/>
+							</f:content>
+						</f:SimpleForm>
+						<sfb:SmartFilterBar id="smartFilterBar" entitySet="ZC_ProtifCreditView" persistencyKey="UniqueAndStablePersistencyKey5">
+							<sfb:controlConfiguration>
+								<sfb:ControlConfiguration id="zco" key="CompanyCode" label="{i18n>CompanyCode}" index="4" groupId="_BASIC"/>
+							</sfb:controlConfiguration>
+							<sfb:controlConfiguration >
+								<sfb:ControlConfiguration id="zpt" key="PaymentTerm" label="{i18n>pt}" index="5" groupId="_BASIC"/>
+							</sfb:controlConfiguration>
+							<sfb:controlConfiguration >
+								<sfb:ControlConfiguration id="zpt1" key="DocumentDate" label="{i18n>DocumentDate}" index="5" groupId="_BASIC"/>
+							</sfb:controlConfiguration>
+							<sfb:controlConfiguration >
+								<sfb:ControlConfiguration id="zpt2" key="NetDueDate" label="{i18n>NetDueDate}" index="5" groupId="_BASIC"/>
+							</sfb:controlConfiguration>
+						</sfb:SmartFilterBar>
+						<IconTabBar id="idIconTabBarNoIcons5" expanded="{device>/isNoPhone}">
+							<items>
+								<IconTabFilter text="Overdue invoices" key="overdue">
+									<smartTable:SmartTable id="smrtTblSpecificBadDebt11" entitySet="ZC_ProtifCreditView" useExportToExcel="true" useVariantManagement="true"
+										smartFilterId="smartFilterBar" useTablePersonalisation="true" showRowCount="true" persistencyKey="badDebtFilterPersKey1"
+										tableType="ResponsiveTable" beforeRebindTable="onDataGet" demandPopin="true" enableAutoBinding="true" requestAtLeastFields=""
+										initiallyVisibleFields="CompanyCode,DocumentNumber,Refrence,DocumentDate,NetDueDate,DaysInArrears,Currency,Amount,ItemText">
+										<Table id="treeTable11" growing="true">
+											<columns>
+												<Column id="oCompany11">
+													<customData>
+														<core:CustomData id="idcom1" key="p13nData"
+															value='\{"columnKey": "CompanyCode", "autoColumnWidth": \{ "visibleProperty": "CompanyCode" }, "columnIndex": 0, "leadingProperty": "CompanyCode", "sortProperty": "CompanyCode", "additionalProperty": "CompanyCode", "description": "CompanyCode", "CompanyCode": "descriptionOnly", "width": "360px"}'/>
+													</customData>
+													<Text id="_IDEGen_textVB311" width="8rem" text="{i18n>CompanyCode}"/>
+												</Column>
+												<Column id="oRefrence1">
+													<customData>
+														<core:CustomData id="idRefrence" key="p13nData"
+															value='\{"columnKey": "Refrence", "autoColumnWidth": \{ "visibleProperty": "Refrence" }, "columnIndex": 2, "leadingProperty": "Refrence", "sortProperty": "Refrence", "additionalProperty": "Refrence", "description": "Refrence", "Refrence": "descriptionOnly", "width": "360px"}'/>
+													</customData>
+													<Text id="_IDEGen_textVB32" width="8rem" text="{i18n>Refrence}"/>
+												</Column>
+												<Column id="oio">
+													<customData>
+														<core:CustomData id="iDocumentDateo" key="p13nData"
+															value='\{"columnKey": "DocumentDate", "autoColumnWidth": \{ "visibleProperty": "DocumentDate" }, "columnIndex": 4, "leadingProperty": "DocumentDate", "sortProperty": "DocumentDate", "additionalProperty": "DocumentDate", "description": "DocumentDate", "DocumentDate": "descriptionOnly", "width": "360px"}'/>
+													</customData>
+													<Text id="_IDEGen_textVB16" width="8rem" text="{i18n>DocumentDate}"/>
+												</Column>
+												<Column id="oNetDueDate">
+													<customData>
+														<core:CustomData id="iNetDueDate" key="p13nData"
+															value='\{"columnKey": "NetDueDate", "autoColumnWidth": \{ "visibleProperty": "NetDueDate" }, "columnIndex": 5, "leadingProperty": "NetDueDate", "sortProperty": "NetDueDate", "additionalProperty": "NetDueDate", "description": "NetDueDate", "NetDueDate": "descriptionOnly", "width": "360px"}'/>
+													</customData>
+													<Text id="_IDEGen_textVB17" width="8rem" text="{i18n>NetDueDate}"/>
+												</Column>
+												<Column id="oDaysInArrears">
+													<customData>
+														<core:CustomData id="iDaysInArrears" key="p13nData"
+															value='\{"columnKey": "DaysInArrears", "autoColumnWidth": \{ "visibleProperty": "DaysInArrears" }, "columnIndex": 6, "leadingProperty": "DaysInArrears", "sortProperty": "DaysInArrears", "additionalProperty": "DaysInArrears", "description": "DaysInArrears", "DaysInArrears": "descriptionOnly", "width": "360px"}'/>
+													</customData>
+													<Text id="_IDEGen_textVB19" width="8rem" text="{i18n>DaysInArrears}"/>
+												</Column>
+												<Column id="oCurr1">
+													<customData>
+														<core:CustomData id="idcurr1" key="p13nData"
+															value='\{"columnKey": "Currency", "autoColumnWidth": \{ "visibleProperty": "Currency" }, "columnIndex": 7, "leadingProperty": "Currency", "sortProperty": "Currency", "additionalProperty": "Currency", "description": "Currency", "Currency": "descriptionOnly", "width": "360px"}'/>
+													</customData>
+													<Text id="_IDEGen_textVB41" width="8rem" text="{i18n>Currency}"/>
+												</Column>
+												<Column id="oAmount">
+													<customData>
+														<core:CustomData id="idoAmount" key="p13nData"
+															value='\{"columnKey": "Amount", "autoColumnWidth": \{ "visibleProperty": "Amount" }, "columnIndex": 8, "leadingProperty": "Amount", "sortProperty": "Amount", "additionalProperty": "Amount", "description": "Amount", "Amount": "descriptionOnly", "width": "360px"}'/>
+													</customData>
+													<Text id="_IDEGen_textVB5" width="8rem" text="{i18n>OverdueInvoiceAmount}"/>
+												</Column>
+												<Column id="oItemText">
+													<customData>
+														<core:CustomData id="idItemText" key="p13nData"
+															value='\{"columnKey": "ItemText", "autoColumnWidth": \{ "visibleProperty": "ItemText" }, "columnIndex": 9, "leadingProperty": "ItemText", "sortProperty": "ItemText", "additionalProperty": "ItemText", "description": "ItemText", "ItemText": "descriptionOnly", "width": "360px"}'/>
+													</customData>
+													<Text id="_IDEGen_textVB0" width="8rem" text="{i18n>ItemText}"/>
+												</Column>
+											</columns>
+											<items>
+												<ColumnListItem>
+													<cells>
+														<Text text="{CompanyCode}"></Text>
+														<Text text="{Refrence}"></Text>
+														<ObjectStatus text="{parts:[{path:'DocumentDate'}],formatter:'.formatter.setDate'}"
+															state="{parts:[{path:'DocumentDate'}],formatter:'.formatter.setDateColor'}"></ObjectStatus>
+														<ObjectStatus text="{parts:[{path:'NetDueDate'}],formatter:'.formatter.setDate'}"
+															state="{parts:[{path:'NetDueDate'}],formatter:'.formatter.setDateColor'}"></ObjectStatus>
+														<Text text="{DaysInArrears}"></Text>
+														<Text text="{Currency}"></Text>
+														<Text text="{Amount}"></Text>
+														<Button icon="sap-icon://edit" press="onEdit"></Button>
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+									</smartTable:SmartTable>
+								</IconTabFilter>
+								<IconTabFilter text="All invoices" key="allinv">
+									<smartTable:SmartTable id="smrtTblSpecificBadDebt12" entitySet="ZC_ProtifCreditView" useExportToExcel="true" useVariantManagement="true"
+										smartFilterId="smartFilterBar" useTablePersonalisation="true" showRowCount="true" persistencyKey="badDebtFilterPersKey1"
+										tableType="ResponsiveTable" beforeRebindTable="onDataGet" demandPopin="true" enableAutoBinding="true" requestAtLeastFields=""
+										initiallyVisibleFields="DocumentNumber,CompanyCode,Currency,OrderValue,Refrence,DocumentDate,NetDueDate,DaysInArrears,Amount">
+										<Table id="treeTable14">
+											<columns>
+												<Column id="oCompany2311">
+													<customData>
+														<core:CustomData id="idcom231" key="p13nData"
+															value='\{"columnKey": "CompanyCode", "autoColumnWidth": \{ "visibleProperty": "CompanyCode" }, "columnIndex": 1, "leadingProperty": "CompanyCode", "sortProperty": "CompanyCode", "additionalProperty": "CompanyCode", "description": "CompanyCode", "CompanyCode": "descriptionOnly", "width": "360px"}'/>
+													</customData>
+													<Text id="_IDEGen_textVB23311" width="8rem" text="{i18n>CompanyCode}"/>
+												</Column>
+												<Column id="oCompanyCurrency1">
+													<customData>
+														<core:CustomData id="idcom23Currency" key="p13nData"
+															value='\{"columnKey": "Currency", "autoColumnWidth": \{ "visibleProperty": "Currency" }, "columnIndex": 2, "leadingProperty": "Currency", "sortProperty": "Currency", "additionalProperty": "Currency", "description": "Currency", "Currency": "descriptionOnly", "width": "360px"}'/>
+													</customData>
+													<Text id="_IDEGen_textVBCurrency" width="8rem" text="{i18n>Currency}"/>
+												</Column>
+												<Column id="oOrderValue123">
+													<customData>
+														<core:CustomData id="idcom23OrderValue" key="p13nData"
+															value='\{"columnKey": "OrderValue", "autoColumnWidth": \{ "visibleProperty": "OrderValue" }, "columnIndex": 3, "leadingProperty": "OrderValue", "sortProperty": "OrderValue", "additionalProperty": "OrderValue", "description": "OrderValue", "OrderValue": "descriptionOnly", "width": "360px"}'/>
+													</customData>
+													<Text id="_IDEGen_textVBOrderValue" width="8rem" text="{i18n>ordervalue1}"/>
+												</Column>
+												<Column id="oOrderValueRefrence">
+													<customData>
+														<core:CustomData id="idcom23OrderRefrencee" key="p13nData"
+															value='\{"columnKey": "Refrence", "autoColumnWidth": \{ "visibleProperty": "Refrence" }, "columnIndex": 5, "leadingProperty": "Refrence", "sortProperty": "Refrence", "additionalProperty": "Refrence", "description": "Refrence", "OrderValue": "descriptionOnly", "width": "360px"}'/>
+													</customData>
+													<Text id="_IDEGen_textVBOrderValue123" width="8rem" text="{i18n>Refrence}"/>
+												</Column>
+												<Column id="oio5">
+													<customData>
+														<core:CustomData id="iDocumentDateo5" key="p13nData"
+															value='\{"columnKey": "DocumentDate", "autoColumnWidth": \{ "visibleProperty": "DocumentDate" }, "columnIndex": 6, "leadingProperty": "DocumentDate", "sortProperty": "DocumentDate", "additionalProperty": "DocumentDate", "description": "DocumentDate", "DocumentDate": "descriptionOnly", "width": "360px"}'/>
+													</customData>
+													<Text id="_IDEGen_textVB165" width="8rem" text="{i18n>DocumentDate}"/>
+												</Column>
+												<Column id="oNetDueDate5">
+													<customData>
+														<core:CustomData id="iNetDueDate5" key="p13nData"
+															value='\{"columnKey": "NetDueDate", "autoColumnWidth": \{ "visibleProperty": "NetDueDate" }, "columnIndex": 7, "leadingProperty": "NetDueDate", "sortProperty": "NetDueDate", "additionalProperty": "NetDueDate", "description": "NetDueDate", "NetDueDate": "descriptionOnly", "width": "360px"}'/>
+													</customData>
+													<Text id="_IDEGen_textVB175" width="8rem" text="{i18n>NetDueDate}"/>
+												</Column>
+												<Column id="oDaysInArrears5">
+													<customData>
+														<core:CustomData id="iDaysInArrears5" key="p13nData"
+															value='\{"columnKey": "DaysInArrears", "autoColumnWidth": \{ "visibleProperty": "DaysInArrears" }, "columnIndex": 8, "leadingProperty": "DaysInArrears", "sortProperty": "DaysInArrears", "additionalProperty": "DaysInArrears", "description": "DaysInArrears", "DaysInArrears": "descriptionOnly", "width": "360px"}'/>
+													</customData>
+													<Text id="_IDEGen_textVB195" width="8rem" text="{i18n>DaysInArrears}"/>
+												</Column>
+												<Column id="oAmountInArrears5">
+													<customData>
+														<core:CustomData id="iAmountsInamountArrears5" key="p13nData"
+															value='\{"columnKey": "Amount", "autoColumnWidth": \{ "visibleProperty": "Amount" }, "columnIndex": 10, "leadingProperty": "Amount", "sortProperty": "Amount", "additionalProperty": "Amount", "description": "Amount", "Amount": "descriptionOnly", "width": "360px"}'/>
+													</customData>
+													<Text id="_IDEGen_textVB191345" width="8rem" text="{i18n>Amountinarrears}"/>
+												</Column>
+											</columns>
+											<items>
+												<ColumnListItem>
+													<cells>
+														<Text text="{CompanyCode}"></Text>
+														<Text text="{Currency}"></Text>
+														<Text text="{OrderValue}"></Text>
+														<Text text="{Refrence}"></Text>
+														<ObjectStatus text="{parts:[{path:'DocumentDate'}],formatter:'.formatter.setDate'}"
+															state="{parts:[{path:'DocumentDate'}],formatter:'.formatter.setDateColor'}"></ObjectStatus>
+														<ObjectStatus text="{parts:[{path:'NetDueDate'}],formatter:'.formatter.setDate'}"
+															state="{parts:[{path:'NetDueDate'}],formatter:'.formatter.setDateColor'}"></ObjectStatus>
+														<Text text="{DaysInArrears}"></Text>
+														<Text text="{Amount}"></Text>
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+									</smartTable:SmartTable>
+								</IconTabFilter>
+							</items>
+						</IconTabBar>
+					</IconTabFilter>
+					<IconTabFilter text="{i18n>Managecustomerlineitems}" key="manage">
+						<Button text="{i18n>ViewallInvoices}" press="onInvoice"></Button>
+					</IconTabFilter>
+					<IconTabFilter text="{i18n>Notes}" key="notes">
+						<FeedInput post="onPost" icon=""/>
+					</IconTabFilter>
+					<IconTabFilter text="{i18n>NotesDetails} ({CountNotesNo>/})" key="notesdetails">
+						<List showSeparators="Inner" items="{EntryCollection>/}">
+							<FeedListItem sender="{EntryCollection>AUTHOR}" info="{EntryCollection>Type}" timestamp="{EntryCollection>Date}"
+								text="{EntryCollection>Notetext}" convertLinksToAnchorTags="All"/>
+						</List>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</semantic:content>
+		<semantic:titleMainAction>
+			<semantic:TitleMainAction id="obtnrel" text="{i18n>Release}" press="onRelease"/>
+		</semantic:titleMainAction>
+		<semantic:titleCustomTextActions>
+			<Button icon="sap-icon://refresh" press="onRefresh"/>
+		</semantic:titleCustomTextActions>
+	</semantic:SemanticPage>
+</mvc:View>
